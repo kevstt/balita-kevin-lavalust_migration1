@@ -65,6 +65,7 @@ $config['version']                 = '4.6.0';
 | Values: development and production
 */
 $config['environment'] = getenv('APP_ENV') ?: 'development';
+$config['allow_origin'] = getenv('CORS_ALLOWED_ORIGIN') ?: 'http://localhost:5173';
 
 /*
 |--------------------------------------------------------------------------

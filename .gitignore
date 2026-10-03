@@ -9,6 +9,7 @@
 vendor/
 app/vendor/
 composer.lock
+/public/product/
 
 # Cache & Logs
 runtime/*

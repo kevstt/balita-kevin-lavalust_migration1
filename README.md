@@ -215,6 +215,8 @@ Route definition:
 $router->get('/api/users', 'Api::users');
 ```
 
+The product inventory API, React frontend, Aiven TLS configuration, and setup steps are documented in [PRODUCT_SETUP.md](PRODUCT_SETUP.md).
+
 ---
 
 ## Philosophy

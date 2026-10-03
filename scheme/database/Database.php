@@ -268,6 +268,22 @@ class Database {
             PDO::ATTR_EMULATE_PREPARES   => false,
         );
 
+        if ($driver === 'mysql' && !empty($database_config['ssl_ca'])) {
+            $ca_file = $database_config['ssl_ca'];
+            if (!is_file($ca_file)) {
+                throw new PDOException('MySQL SSL CA file not found: ' . $ca_file);
+            }
+
+            if (!defined('PDO::MYSQL_ATTR_SSL_CA')) {
+                throw new PDOException('The PDO MySQL extension is required for MySQL TLS connections.');
+            }
+
+            $options[constant('PDO::MYSQL_ATTR_SSL_CA')] = $ca_file;
+            if (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')) {
+                $options[constant('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')] = true;
+            }
+        }
+
         try {
             $this->db = new PDO($dsn, $username, $password, $options);
             $this->driver = $this->db->getAttribute(PDO::ATTR_DRIVER_NAME);
